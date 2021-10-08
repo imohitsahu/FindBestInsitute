@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+        <title>Find Best Institute</title>
+    </head>
+    <body ng-app='homeApp' ng-controller='homeController'>
+        {% extends 'findbestclass/header.html' %}
+          
+        {% block content %}
+          <div class="p-1" style="height: 4px;">
+            <div class="rounded bg-success" id='loading' role="progressbar" style="width:0%;height: 5px;" aria-valuemax="100"></div>
+          </div>
+
+          <div class="container mt-1" style="min-height: 500px;">
+                <!-- loading -->
+                
+
+              <div class="row mx-auto course-container">
+                  <div class="col-lg-4 col-md-6 mx-auto course" ng-repeat='x in courses'>
+                      <div class="data p-2 m-2 mt-4 rounded border">
+                        <h2 class="text-center p-2 display-3 text-white" style="background-color: (( getBg($index) )) ;"><b> (( toUpper(x.courseName[0]) )) </b></h2>
+                        <table class="table table-sm table-striped">
+                          <tr class="">
+                            <td class="p-0  pl-3"><small>Course</small></td>
+                            <td class="p-0"><small>((x.courseName))</small></td>
+                          </tr>
+                          <tr class="">
+                            <td class="p-0  pl-3"><small>Course Fees</small></td>
+                            <td class="p-0"><small>Rs. ((x.courseFees))</small></td>
+                          </tr>
+                          <tr class="">
+                            <td class="p-0  pl-3"><small>Owner</small></td>
+                            <td class="p-0"><small>((x.institute.adminName))</small></td>
+                          </tr>
+                          <tr class="">
+                            <td class="p-0  pl-3"><small>Distance From You</small></td>
+                            <td class="p-0"><small class="badge border" >(( getDistanceFromLatLonInKm(x.institute.lat , x.institute.lng , student.lat , student.lng) )) KM</small></td>
+                          </tr>
+                          <tr class="">
+                            <td class="p-0  pl-3"><small>Rating</small></td>
+                            <td class="p-0">
+                              <i class="fa fa-star p-0 m-0 text-success" ng-repeat='i in getNumbers(x.avgrate)'></i>
+                              <i class="fa fa-star-o p-0 m-0" ng-repeat='i in getNumbers(5-x.avgrate)'></i>
+                            </td>
+                          </tr>
+                        </table>
+
+                        <div class="row text-center">
+                          <div class="col-lg-4 mt-2">
+                            <button class="btn btn-sm bg-white text-info border" ng-click='showModel(x , getBg($index));'>More Info</button>
+                          </div>
+                          <div class="col-lg-4 mt-2">
+                            <a class="btn border btn-sm btn-white text-dark bg-white" target="_blank" href='https://maps.google.com/?q=(( x.institute.lat )),(( x.institute.lng ))' style="text-decoration: none;">See On Map <span class="material-icons icon">open_in_new</span></a>
+                          </div>
+                        </div>
+                      </div>
+                  </div>
+              </div>
+
+          </div>
+
+          <!-- Institute Details Model -->
+
+          <!-- Modal -->
+          <div class="modal fade rounded" id="infoModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered rounded" role="document">
+              <div class="modal-content rounded">
+                <div class="model-header rounded">
+                  <div clsss=' text-center text-white rounded'>
+                      <h1 class="text-center display-1 text-white rounded" style="background-color: (( selectedCourse.color ))"><b>(( toUpper(selectedCourse.courseName[0]) ))</b></h1>
+                  </div>
+                </div>
+                <div class="model-body p-3">
+                    <h4 class="">(( selectedCourse.courseName ))</h4>
+                    <hr>
+                    <table class="table table-striped table-sm">
+                        <tr>
+                          <td class="" width="25%">Course</td>
+                          <td class="">(( selectedCourse.courseName ))</td>
+                        </tr>
+
+                        <tr>
+                          <td>Course Fees</td>
+                          <td>(( selectedCourse.courseFees ))</td>
+                        </tr>
+
+                        <tr>
+                          <td>Institute</td>
+                          <td>(( selectedCourse.institute.name ))</td>
+                        </tr>
+
+                        <tr>
+                          <td>Owner</td>
+                          <td>(( selectedCourse.institute.adminName ))</td>
+                        </tr>
+
+                        <tr>
+                          <td>Email </td>
+                          <td>(( selectedCourse.institute.email ))</td>
+                        </tr>
+
+                        <tr>
+                          <td>Contact </td>
+                          <td>(( selectedCourse.institute.contact ))</td>
+                        </tr>
+
+                        <tr>
+                          <td>Address </td>
+                          <td>(( selectedCourse.institute.address ))</td>
+                        </tr>
+                        <tr>
+                          <td>Rating</td>
+                          <td class="row">
+                            <div class="col-lg-2">
+                              <p class="" style="font-size: 30px">(( selectedCourse.ratinginfo.avg))</p>
+                            </div>
+                            <div class="col-lg-10">
+                              <table width="100%" class="table table-sm rating-table">
+                                <tr>
+                                  <td><small>5</small></td>
+                                  <td width="100%">
+                                    <div class="progress">
+                                      <div class="progress-bar bg-success" role="progressbar" style="width: (( getper(selectedCourse.ratinginfo.five , selectedCourse.ratinginfo.total) ))" aria-valuenow="70" aria-valuemin="0" aria-valuemax="(( selectedCourse.ratinginfo.total))"></div>
+                                    </div>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td><small>4</small></td>
+                                  <td width="100%">
+                                    <div class="progress">
+                                      <div class="progress-bar bg-success" role="progressbar" style="width: (( getper(selectedCourse.ratinginfo.four , selectedCourse.ratinginfo.total) ))" aria-valuenow="((selectedCourse.ratinginfo.four))" aria-valuemin="0" aria-valuemax="(( selectedCourse.ratinginfo.total))"></div>
+                                    </div>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td><small>3</small></td>
+                                  <td width="100%">
+                                    <div class="progress">
+                                      <div class="progress-bar bg-success" role="progressbar" style="width: (( getper(selectedCourse.ratinginfo.three , selectedCourse.ratinginfo.total) ))" aria-valuenow="70" aria-valuemin="0" aria-valuemax="(( selectedCourse.ratinginfo.total))"></div>
+                                    </div>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td><small>2</small></td>
+                                  <td width="100%">
+                                    <div class="progress">
+                                      <div class="progress-bar bg-success" role="progressbar" style="width: (( getper(selectedCourse.ratinginfo.two , selectedCourse.ratinginfo.total) ))" aria-valuenow="70" aria-valuemin="0" aria-valuemax="(( selectedCourse.ratinginfo.total))"></div>
+                                    </div>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td><small>1</small></td>
+                                  <td width="100%">
+                                    <div class="progress">
+                                      <div class="progress-bar bg-success" role="progressbar" style="width: (( getper(selectedCourse.ratinginfo.one , selectedCourse.ratinginfo.total) ))" aria-valuenow="70" aria-valuemin="0" aria-valuemax="(( selectedCourse.ratinginfo.total))"></div>
+                                    </div>
+                                  </td>
+                                </tr>
+
+                              </table>
+                            </div>
+                          </td>
+                        </tr>
+                    </table>
+
+
+
+                    <div class="row text-center">
+                      <div class="col-lg-4 mt-2">
+                        <a class="btn border btn-sm btn-white text-dark bg-white" target="_blank" href='https://maps.google.com/?q=(( selectedCourse.institute.lat )),(( selectedCourse.institute.lng ))' style="text-decoration: none;">See On Map <span class="material-icons icon">open_in_new</span></a>
+                      </div>
+                      <div class="col-lg-4 mt-2">
+                        <a class="btn border btn-sm btn-white text-dark bg-white" target="_blank" style="text-decoration: none;">See Institue Profile <span class="material-icons icon">school</span></a>
+                      </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          {% load staticfiles %}
+
+          <link rel="stylesheet" type="text/css" href="{% static 'css/student/home.css' %}">
+          <!-- Optional JavaScript -->
+          <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+          <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+          <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+          <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+          <script type="text/javascript" src="{% static 'js/student/home.js' %}"></script>
+          {% endblock %}
+    </body>
+</html>
