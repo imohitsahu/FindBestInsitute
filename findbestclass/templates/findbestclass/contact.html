@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+        <title>Find Best Institute</title>
+    </head>
+    <body>
+        {% extends 'findbestclass/header.html' %}
+          
+        {% block content %}
+        
+        <div class="">
+            <div class="mt-2 p-4 mx-auto text-center col-lg-6">
+                <h1>Get In <font color="#2ecc72">Touch</font></h1>        
+                <p style="color: #7B8788">
+                    Have any questions or doubts? We are just a call away. You can also drop down at our office  
+                    and we'll chat!
+                </p>
+            </div>
+
+            <div class="m-3">
+              <div class="row col-lg-9 mx-auto m-4">
+                <div class="col-lg-4 container" style="position: relative; text-align: center;">
+                    {% load staticfiles %}
+                    <img src="{% static 'css/note.png' %}">
+                    <div class="centered" style="position: absolute; top: 50%; left: 50%;text-align: center;transform: translate(-50%, -50%);">
+                      <h5>Send Us An Email</h5>
+                      </WE>RE STANDING BY!<h6>
+                      <p>Email: contact@findbestclass.com today!</p>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 container" style="position: relative; text-align: center;">
+                    {% load staticfiles %}
+                    <img src="{% static 'css/note.png' %}">
+                    <div class="centered" style="position: absolute; top: 50%; left: 50%;transform: translate(-50%, -50%);">
+                      <h5>Corporate Office</h5>
+                      <h6>CORPORATE LOCATION</h6>
+                      <p>A-10 , 3rd Floor, Lajpat Nagar - 2,
+                        <br>New Delhi - 110024.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 container" style="position: relative; text-align: center;">
+                    {% load staticfiles %}
+                    <img src="{% static 'css/note.png' %}">
+                    <div class="centered" style="position: absolute; top: 50%; left: 50%;text-align: center;transform: translate(-50%, -50%);">
+                      <h5>Call us To Schedule</h5>
+                      <h6>Call us Today</h6>
+                      <p>+919144460897</p>
+                    </div>
+                </div>
+
+
+                
+              </div>
+            </div>
+
+        </div>
+
+
+
+
+
+
+          {% load staticfiles %}
+
+          <link rel="stylesheet" type="text/css" href="{% static 'css/contact.css' %}">
+          <!-- Optional JavaScript -->
+          <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+          <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+          <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+          <script type="text/javascript" src="{% static 'js/contact.js' %}"></script>
+          {% endblock %}
+    </body>
+</html>

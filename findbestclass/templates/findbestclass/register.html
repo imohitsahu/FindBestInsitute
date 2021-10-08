@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <title>Registration</title>
+       
+    </head>
+    <body class="" ng-app='registrationApp' ng-controller='registrationController'>
+
+          {% extends 'findbestclass/header.html' %}
+          
+          {% block content %}
+          <div class="content">
+            <div class="mx-auto text-center">
+              {% load staticfiles %}
+              <img src=" {% static 'css/reg.jpg' %}" class="img-fluid">
+            </div>
+          <div class="row">
+              <!-- Institute Registration  -->
+
+              <div class="col-lg-4 mx-auto col-sm-8 col-md-5  p-0 rounded border-top-0 border m-4 form-div">
+                <div class="jumbotron p-0 m-0 text-white text-center" style="background-color: #15B5B0">
+                  <h4 class="p-3">Institute Registration here</h4>
+                </div>
+                <form class="p-4" action="institute_registration" method="post">
+
+                      {% csrf_token %}
+
+                      <div class="input-group mt-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Intitute Name</span>
+                        </div>
+                        <input type="text" name="name" class="form-control" placeholder=" " required="">
+                      </div> 
+
+                      <div class="input-group mt-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Admin Name</span>
+                        </div>
+                        <input type="text" name="admin" class="form-control" placeholder=" " required="">
+                      </div>  
+
+                      <div class="input-group mt-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Contact</span>
+                        </div>
+                        <input type="number" name="contact" class="form-control" placeholder=" " required="">
+                      </div>                       
+
+                      <div class="input-group mt-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Email</span>
+                        </div>
+                        <input type="email" name="email" class="form-control" placeholder="example@gmail.com" required="">
+                      </div>
+                      <div class="input-group mt-3" id='input_group_password'>
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Password</span>
+                        </div>
+                        <input type="password" name="password"  id='password' class="form-control" placeholder="************"  required="">
+                      </div>
+
+                      <div class="input-group mt-3" id='input_group_address'>
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Address</span>
+                        </div>
+                          <input type="text" name="address" ng-keyup='getAddress("institute")' id='address' class="form-control" required="">
+                      </div>
+                      <div class="m-1">
+                        <small>Select Location from Suggetions</small>
+                      </div>
+
+                      <div class="input-group mt-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">City</span>
+                        </div>
+                          <input type="text" name="city" id='city' class="form-control" required="">
+                      </div>
+
+                      <div class="input-group mt-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">State</span>
+                        </div>
+                          <input type="text" name="state" id='state' class="form-control" required="">
+                      </div>
+
+                      <div class="input-group mt-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Landmark</span>
+                        </div>
+                          <input type="text" name="landmark" id='landmark' class="form-control" required="">
+                      </div>
+
+                      <div class="input-group" hidden>
+                          <input type="text" name="lat" id="lat" value="">
+                          <input type="text" name="lng" id="lng" value="">   
+                      </div>
+
+
+
+                      <div class='mt-3'>
+                        <input type="submit" class="btn text-white form-control" style="background-color: #15B5B0" value="Signup">
+                      </div>
+
+                      <div class="mt-3">
+                        <a href="/" class="text-info border btn form-control" style="text-decoration: none;">Have an account ? Login</a>
+                      </div>
+
+                       <div class='places'>
+                            <ul class="list-group">
+                              <li class="list-group-item pl-3 p-0 place-item" ng-repeat="y in addresses" ng-click='selectPlace($event , y.formatted_address , y.lat , y.lng , y.city , y.state , "institute")'>((y.formatted_address))
+                              </li>
+                            </ul>
+                        </div>
+                  </form>
+              </div>
+              <!-- Student Registration -->
+
+              <div class="col-lg-4 mx-auto col-sm-8 col-md-5 p-0 rounded border-top-0 border m-4 form-div">
+                <div class="jumbotron p-0 m-0 text-white text-center" style="background-color: #15B5B0">
+                  <h4 class="p-3">Student Registration here</h4>
+                </div>
+                <form class="p-4" action="student_registration" method="post">
+                  {% csrf_token %}
+
+                      {% if student_error is not None%}
+                       <p class="alert alert-warning">{{student_error}}</p>
+                      {% endif %}
+                      <div class="input-group mt-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Name</span>
+                        </div>
+                        <input type="text" name="name" class="form-control" placeholder="John" required="">
+                      </div>
+
+                      <div class="input-group mt-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Email</span>
+                        </div>
+                        <input type="email" name="email" class="form-control" placeholder="example@gmail.com" required="">
+                      </div>
+                      
+                      <div class="input-group mt-3" id=''>
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Password</span>
+                        </div>
+                        <input type="password" name="password" class="form-control" placeholder="************" required="">
+                      </div>
+
+                      <div class="input-group mt-3" id=''>
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Contact</span>
+                        </div>
+                        <input type="number" name="contact" class="form-control" placeholder=" " required="">
+                      </div>
+
+                      <div class="input-group mt-3" id='student_address_div'>
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Address</span>
+                        </div>
+                        <input type="text" name="address"  class="form-control" placeholder=" " id="student_address" ng-keyup='getAddress("student")' required="" ">
+                      </div>
+
+                       <div class="input-group" hidden="">
+                          <input type="text" name="lat" id="student_lat" value="">
+                          <input type="text" name="lng" id="student_lng" value="">   
+                      </div>
+
+                      <div class="input-group mt-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">City</span>
+                        </div>
+                          <input type="text" name="city" id='student_city' class="form-control" required="">
+                      </div>
+
+                      <div class="input-group mt-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">State</span>
+                        </div>
+                          <input type="text" name="state" id='student_state' class="form-control" required="">
+                      </div>
+
+
+                      <div class='student_address'>
+                            <ul class="list-group">
+                              <li class="list-group-item pl-3 p-0 place-item student_address_item" ng-repeat="y in addresses"  ng-click='selectPlace($event , y.formatted_address , y.lat , y.lng , y.city , y.state , "student")'>((y.formatted_address))
+                              </li>
+                            </ul>
+                      </div>
+
+                      <div class='mt-3'>
+                        <input type="submit" class="btn text-white form-control" style="background-color: #15B5B0" value="Signup">
+                      </div>
+
+                      <div class="mt-3">
+                        <a href="/" class="text-info border btn form-control" style="text-decoration: none;">Have an account ? Login</a>
+                      </div>
+                      
+                  </form>
+              </div>
+          </div>
+        </div>
+
+
+
+          
+
+
+    <!-- Optional JavaScript -->
+          <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
+
+          
+          {% load staticfiles %}
+          
+
+          <link rel="stylesheet" type="text/css" href="{% static 'css/register.css' %}">
+
+          <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+          <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+          <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+
+          <script type="text/javascript" src="{% static 'js/register.js' %}"></script>
+          
+          {% endblock %}
+    </body>
+</html>

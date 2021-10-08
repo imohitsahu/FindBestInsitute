@@ -1,0 +1,133 @@
+
+		<meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+        {% load staticfiles %}
+
+        <link rel="stylesheet" type="text/css" href="{% static 'css/header.css' %}">
+
+
+        <!-- NAVBARS  -->
+
+        <nav class="navbar navbar-expand-lg navbar-dark bg-info">
+          <a class="navbar-brand border p-2 rounded" href="#">Find Best Institute</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item active">
+                <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/about">About</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/contact">Contact Us</a>
+              </li>
+            </ul>
+
+	              <input class="form-control only-at-home col-lg-4 mr-auto form-control-sm" type="search" placeholder="Search Here , Type anything Course , Institute or Address" aria-label="Search" ng-keyup='search($event);' ng-focus='loading()' hidden="">
+
+            <ul class="navbar-nav ml-auto">
+	            {% if request.session.studentId is not None %}
+		            <li class="mr-2 nav-item">
+		            	<a href="/student_profile" class="nav-link">
+		            	<span class="border p-1" style="border-radius: 40%;font-size: 18px; vertical-align: middle;">{{ request.session.student.name|slice:"1" }}</span>
+		            	<span class="" style="vertical-align: middle;">Profile</span>
+		            	</a>
+		            </li>
+	            {% endif %}
+            	{% if request.session.studentId is not None or request.session.instituteId is not None  %}
+	              <li class="nav-item">
+	                <a class="nav-link" href="/logout">Logout <i class="fa fa-sign-out icon"></i></a>
+	              </li>
+              	{% endif %}
+            </ul>
+
+          </div>
+        </nav>
+		<!-- <hr> -->
+
+		{% block content %}
+			<!-- COntect will shown here -->
+		{% endblock %}
+
+		<hr>
+		<!-- <div class="" style="background-color: #333945"> -->
+		<div class="bg-info">
+
+			<!--  Footer  -->
+
+			<hr class="text-white bg-light">
+
+			<div class="ml-4 pl-4 row">
+				<ul class="list-inline text-white col-lg-6">
+				  <li class="list-inline-item"><h4>Follow Us</h4></li>
+				  <li class="list-inline-item"><a href="https://www.facebook.com/"><i class="icon-social fa fa-facebook-square"></i></a></li>
+				  <li class="list-inline-item"><a href=""><i class="icon-social fa fa-twitter-square"></i></a></li>
+				  <li class="list-inline-item"><a href=""><i class="icon-social fa fa-pinterest-square"></i></a></li>
+				  <li class="list-inline-item"><a href=""><i class="icon-social fa fa-github"></i></a></li>
+				  <li class="list-inline-item">
+				  	<a target='_blank' href="https://www.youtube.com/channel/UCUqe05HRZSy7vbtRYWguR5Q?view_as=subscriber"><i class="icon-social fa fa-youtube-play" target="blank_"></i></a></li>
+				  <li class="list-inline-item"><a href=""><i class="icon-social fa fa-linkedin-square"></i></a></li>
+				  <li class="list-inline-item"><a href=""><i class="icon-social fa fa-instagram"></i></a></li>
+				</ul>
+
+				<ul class="list-inline text-white rounded">
+				  <li class="list-inline-item"><h4>Instant Support</h4></li>
+				  <li class="list-inline-item"><i class="icon-social fa fa-whatsapp"></i></li>
+				  <li class="list-inline-item"><i class="icon-social fa fa-phone"></i></li>
+				</ul>
+			</div>
+
+			<hr class="text-white bg-light">
+
+			<div class="row footer-links" style="color:#DAE0E2">
+				<div class="col-lg-3">
+					<ul>
+						<li ><b>Quick Links</b></li>
+						<li class="text-warning"><b>-------</b></li>
+						<li ><a href="javascript:void(0)" class="text-white">Home</a></li>
+						<li ><a href="javascript:void(0)" class="text-white">About Us</a></li>
+						<li ><a href="javascript:void(0)" class="text-white">Contact Us</a></li>
+					</ul>
+				</div>
+
+				<div class="col-lg-3">
+					<ul>
+						<li ><b>Contact Info</b></li>
+						<li class="text-warning"><b>-------</b></li>
+						<li ><a class="text-white">A-10, 3rd Floor, Lajpat Nagar 2, New Delhi - 110024, India</a></li>
+						<li ><a class="text-white">+9144460897</a></li>
+						<li ><a class="text-white">+9989886598</a></li>
+						<li ><a class="text-white">contact@fbi.in</a></li>
+					</ul>
+				</div>
+
+				<div class="col-lg-3">
+					<ul>
+						<li ><b>Policies</b></li>
+						<li class="text-warning"><b>-------</b></li>
+						<li ><a href="javascript:void(0)" class="text-white">Terms & Conditions</a></li>
+						<li ><a href="javascript:void(0)" class="text-white">Privacy Policy</a></li>
+					</ul>
+				</div>
+
+			</div>
+
+			<hr class="" style="background-color: #7B8788">
+
+			<div class="p-2 text-light">
+				<p style="font-size: 16px">&copy; Copyright 2019 Find Best Institute</p>
+			</div>
+		</div>
+
+		
+
+
