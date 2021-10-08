@@ -1,0 +1,33 @@
+.footer-links div ul li a{
+	font-size: 14px;
+}
+.icon-social{
+	font-size: 22px;
+	cursor: pointer;
+	transition: transform 0.2s;
+	color: white;
+	margin: 6px;
+}
+.icon-social:hover{
+	transform: scale(1.2);
+	color: white;
+}
+
+li{
+	list-style-type: none;
+}
+
+a{
+	text-decoration: none;
+}
+
+body{
+	overflow-x: hidden;
+}
+
+#forgotPasswordbutton{
+	cursor: pointer;
+}
+
+
+
