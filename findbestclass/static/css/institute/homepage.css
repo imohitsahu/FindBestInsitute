@@ -1,0 +1,7 @@
+.icon{
+	transition:  transform 0.5s;
+}
+.icon:hover{
+	cursor: pointer;
+	transform: rotate(360deg);
+}
